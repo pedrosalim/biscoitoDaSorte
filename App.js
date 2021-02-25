@@ -8,15 +8,18 @@ class App extends Component {
     this.state = {
       textPhrase: '',
       img: require('./src/biscoito.png'),
+      buttonText: 'ABRIR BISCOITO'
     }
 
     this.breakCookie = this.breakCookie.bind(this)
+    this.backCookie = this.backCookie.bind(this)
 
     this.phrases = [
       'He was waiting for the rain to stop.',
       "She was upset when it didn't boil.",
       'You have been sleeping for a long time.',
-      'You might enjoy a massage.'
+      'You might enjoy a massage.',
+      'Kenedy vagabundo'
     ]
   }
 
@@ -24,8 +27,17 @@ class App extends Component {
     let randonNumber = Math.floor(Math.random() * this.phrases.length)
 
     this.setState({
+      buttonText: "BISCOITO ABERTO!!",
       textPhrase: ' "' + this.phrases[randonNumber] + '" ',
       img: require('./src/biscoitoAberto.png')
+    })
+  }
+
+  backCookie() {
+    this.setState({
+      buttonText: "ABRIR BISCOITO",
+      textPhrase: "",
+      img: require('./src/biscoito.png')
     })
   }
 
@@ -42,7 +54,13 @@ class App extends Component {
 
         <TouchableOpacity style={styles.button} onPress={this.breakCookie}>
           <View style={styles.buttonArea}>
-            <Text style={styles.buttonText}>ABRIR BISCOITO</Text>
+            <Text style={styles.buttonText}>{ this.state.buttonText }</Text>
+          </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.button} onPress={this.backCookie}>
+          <View style={styles.buttonArea}>
+            <Text style={styles.buttonText}>RESETAR BISCOITO</Text>
           </View>
         </TouchableOpacity>
 
@@ -74,7 +92,8 @@ const styles = StyleSheet.create({
     height: 50,
     borderWidth: 2,
     borderColor: '#DD7B22',
-    borderRadius: 18
+    borderRadius: 18,
+    marginBottom: 10
   },
   buttonArea: {
     flex: 1,
